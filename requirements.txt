@@ -1,0 +1,8 @@
+# Python version is 3.12.7, it should be installed separately (for example via Python installer, conda, or pyenv)
+pip==26.1.2
+numpy==2.4.6
+pandas==3.0.4
+scikit-learn==1.9.0
+jupyter==1.1.1
+matplotlib==3.10.3
+seaborn==0.13.2
