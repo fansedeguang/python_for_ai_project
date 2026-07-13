@@ -1,0 +1,3 @@
+[
+  "tests/test_reproducibility.py::test_contract_baseline_params_reproduce_reference_f1"
+]

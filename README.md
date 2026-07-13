@@ -12,51 +12,82 @@ This repository implements a full diagnostic pipeline for the Kaggle Disaster Tw
 
 ```
 .
-├── data/                         # Raw data (download automatically)
-│   ├── train.csv                 # Full labeled dataset (from GitHub mirror)
-│   └── split_indices.json        # Fixed split indices (provided)
-├── configs/                      # Reference contracts
-│   └── project_contract.json     # Baseline metrics & tolerance
-├── pipeline/                     # Reusable modules (no ticket‑specific logic)
-│   ├── __init__.py
-│   ├── loader.py                 # Load CSV + apply fixed split
-│   ├── preprocess.py             # Text cleaning functions
-│   ├── features.py               # TF‑IDF + shallow features
-│   ├── models.py                 # Model training (LR, NB, SVM, etc.)
-│   ├── evaluate.py               # Metrics, confusion deltas, PR curves
-│   └── utils.py                  # Seed, version assertions, helpers
-├── experiments/                  # Scripts for each ticket
-│   ├── run_baseline.py           # Ticket 1
-│   ├── run_normalization.py      # Ticket 2
-│   ├── run_shortcut_audit.py     # Ticket 3
-│   ├── run_threshold_tuning.py   # Ticket 4
-│   ├── run_data_audit.py         # Ticket 5
-│   └── run_final_heldout.py      # Final evaluation (after freezing)
-├── tickets/                      # Qualitative analysis (Markdown)
-│   ├── ticket-1-baseline.md
-│   ├── ticket-2-normalization.md
-│   ├── ticket-3-shortcuts.md
-│   ├── ticket-4-decision-rule.md
-│   └── ticket-5-data-quality.md
-├── predictions/                  # Prediction exports
-│   ├── heldout_predictions.csv   # Required final artifact
-│   └── dev_predictions/          # Optional intermediate predictions
-├── results/                      # Machine‑checkable summaries
-│   ├── summary.csv               # Must include fixed_fp/fixed_fn etc.
-│   ├── threshold_sweep.csv       # Precision/Recall/F1 sweep
-│   ├── data_quality_audit.csv    # Disposition column required
-│   └── figures/                  # Optional plots
-├── logs/                         # Experiment logs & AI chat history
-│   └── chat.md                   # AI usage declaration
-├── tests/                        # Validation scripts (schema checks)
-│   ├── test_split_integrity.py
-│   ├── test_artifact_schema.py
-│   └── test_reproducibility.py
-├── requirements.txt              # Locked dependencies
-├── download_data.py              # Script to fetch train.csv from mirror
-├── setup_dirs.py                 # Creates all necessary folders
-├── Makefile                      # Optional: `make run_all`, `make validate`
-└── report.pdf                    # Final project report
+├── .wheels/ # Utility scripts and helpers
+│ ├── .gitignore
+│ └── download_data.py # Download train.csv from mirror
+│
+├── configs/ # Reference contracts
+│ └── project_contract.json # Baseline metrics and tolerance
+│
+├── data/ # Raw data (read‑only)
+│ ├── README_DATA.md # Optional data description
+│ ├── split_indices.json # Fixed split IDs (provided)
+│ └── train.csv # Full labeled dataset (auto‑downloaded)
+│
+├── experiments/ # Per‑ticket execution scripts
+│ ├── run_baseline.py # Ticket 1: Baseline reproduction
+│ ├── run_normalization.py # Ticket 2: Text normalization
+│ ├── run_shortcut_audit.py # Ticket 3: Shortcut feature audit
+│ ├── run_threshold_tuning.py # Ticket 4: Threshold / model tuning
+│ ├── run_data_audit.py # Ticket 5: Data quality audit
+│ └── run_final_heldout.py # Final evaluation (run after freezing)
+│
+├── logs/ # Experiment logs and AI chat history
+│ └── chat.md # AI usage declaration and verification logs
+│
+├── pipeline/ # Reusable modules (no ticket‑specific logic)
+│ ├── init.py
+│ ├── contract.py # Reference contract and baseline parameters
+│ ├── loader.py # Load CSV + apply fixed split
+│ ├── preprocess.py # Text cleaning functions
+│ ├── features.py # TF‑IDF and shallow feature construction
+│ ├── models.py # Model training (LR, NB, SVM, etc.)
+│ ├── evaluate.py # Metrics, confusion deltas, PR curves
+│ └── utils.py # Seed, version assertions, helpers
+│
+├── predictions/ # Prediction outputs
+│ ├── heldout_predictions.csv # Final submission artifact (required)
+│ └── dev_predictions/ # Intermediate predictions on dev set
+│ └── baseline_dev.csv # Baseline predictions (reference)
+│
+├── results/ # Machine‑checkable summary tables
+│ ├── summary.csv # Metrics and flip statistics for each ticket
+│ ├── threshold_sweep.csv # (to be generated) PR curve sweep data
+│ ├── data_quality_audit.csv # (to be generated) Data quality audit table
+│ └── figures/ # (optional) Plots and figures
+│
+├── tests/ # Pre‑submission validation scripts
+│ ├── test_artifact_schema.py # Check CSV column names and enumerations
+│ ├── test_reproducibility.py # Verify baseline reproducibility
+│ └── test_split_integrity.py # Check split completeness and no overlap
+│
+├── tickets/ # Qualitative analysis reports (Markdown)
+│ ├── ticket-1-baseline.md
+│ ├── ticket-2-normalization.md
+│ ├── ticket-3-shortcuts.md
+│ ├── ticket-4-decision-rule.md
+│ └── ticket-5-data-quality.md
+│
+├── .vscode/ # VS Code configuration (optional)
+│ └── settings.json
+│
+├── requirements.txt # Locked dependency versions
+├── setup_dirs.py # Create required directory structure
+├── validate_artifacts.py # Final artifact schema validator
+├── topic-a-handout.md # Project description (English)
+├── topic-a-handout-zh.md # Project description (Chinese)
+├── topic-a-handout.pdf # Project description (PDF)
+├── rustup-init.exe # (optional) Rust toolchain installer
+├── tmp_search_baseline.py # (temporary) diagnostic script
+├── README.md # This file
+└── report.pdf # (to be generated) Final project report
+
+text
+
+> **Notes**:
+> - `threshold_sweep.csv` and `data_quality_audit.csv` will be generated after running Ticket 4 and Ticket 5.
+> - `report.pdf` must be produced at the end of the project.
+> - `tmp_search_baseline.py` is a temporary debugging file and can be ignored.
 ```
 
 ## Environment Setup
