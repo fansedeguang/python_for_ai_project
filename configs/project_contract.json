@@ -3,5 +3,24 @@
   "reference_floor_f1": 0.0,
   "reference_baseline_f1": 0.7574221578566256,
   "tolerance": 0.001,
+  "baseline_params": {
+    "tfidf": {
+      "max_features": 5000,
+      "ngram_range": [1, 1],
+      "lowercase": true,
+      "stop_words": null,
+      "use_idf": true,
+      "smooth_idf": true,
+      "sublinear_tf": true,
+      "token_pattern": "(?u)\\b\\w+\\b"
+    },
+    "logistic_regression": {
+      "C": 1.0,
+      "solver": "lbfgs",
+      "max_iter": 1000,
+      "random_state": 42,
+      "class_weight": null
+    }
+  },
   "notes": "Reference metrics are computed on the real Kaggle Disaster Tweets training CSV mirrored from ucbrise/kaggle-nlp-disasters, using the fixed stratified split in data/split_indices.json."
 }

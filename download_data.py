@@ -1,7 +1,7 @@
 """
 Data Download Script for Disaster Tweets Project
-拉取镜像源 (ucbrise/kaggle-nlp-disasters) 中的标注数据到 data/ 文件夹。
-仅下载 train.csv, 因为 test.csv 和 sample_submission.csv 在作业中禁用。
+Pull the labeled data from the image source (ucbrise/kaggle-nlp-disasters) into the data/ folder. 
+Only download train.csv, since test.csv and sample_submission.csv are disabled in the assignment.
 """
 
 import os
@@ -47,7 +47,7 @@ def main():
     # 1. create data
     data_dir = Path("data")
     data_dir.mkdir(exist_ok=True)
-    print(f"📁 数据存放目录: {data_dir.absolute()}")
+    print(f"📁 Data storage directory: {data_dir.absolute()}")
 
     # 2. download train.csv
     for filename in REQUIRED_FILES:
