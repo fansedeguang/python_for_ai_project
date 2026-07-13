@@ -84,11 +84,26 @@ pip install -r requirements.txt
 The core packages are:
 
 - Python 3.12.7
-- scikit-learn 1.9.0
-- pandas 3.0.4
-- numpy 2.4.6
-- (optional) PyTorch 2.7.0 (CPU) – if you add a neural baseline
 
+# ML and data process
+scikit-learn==1.9.0
+pandas==3.0.4
+numpy==2.4.6
+
+# Visualization
+matplotlib==3.10.3
+seaborn==0.13.2
+
+# Basic tools
+joblib==1.5.3        
+scipy==1.18.0          
+threadpoolctl==3.6.0   
+
+
+# (Optional - for jupyter assistance)
+jupyter==1.1.1
+notebook==7.6.0
+ipykernel==7.3.0
 ## Data Download
 
 The assignment uses only the **labeled `train.csv`** from the official mirror.  
